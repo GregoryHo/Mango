@@ -91,7 +91,6 @@ public class Speaker implements DecodeListener {
   private void initAudioTrack(int sampleRate, int channelCount) {
     int channelConfig =
         channelCount == 1 ? AudioFormat.CHANNEL_OUT_MONO : AudioFormat.CHANNEL_OUT_STEREO;
-    /* don't even know what this means, references from Honeywell sdk */
     int customBufferSize = BYTES_4096;
     if (sampleRate == 16000 && channelCount == 2) {
       customBufferSize *= 2;
