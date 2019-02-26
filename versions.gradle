@@ -1,0 +1,64 @@
+// build versions defined
+def buildVersions = [:]
+buildVersions.minSdk = 18
+buildVersions.targetSdk = 26
+buildVersions.compileSdk = 26
+buildVersions.buildTools = "28.0.3"
+buildVersions.versionName = "1.0.0"
+buildVersions.sourceCompatibility = JavaVersion.VERSION_1_8
+buildVersions.targetCompatibility = JavaVersion.VERSION_1_8
+ext.buildVersions = buildVersions
+/**
+ * Shared file between builds so that they can all use the same dependencies and
+ * maven repositories.
+ **/
+ext.deps = [:]
+// dependencies versions defined
+def versions = [:]
+versions.androidGradlePlugin = '3.3.1'
+versions.kotlin = "1.3.20"
+versions.ktx = "0.3"
+versions.coroutines = "1.0.0"
+versions.supportLibrary = "27.1.1"
+versions.constraintLayout = "1.1.0"
+// dependencies defined
+def deps = [:]
+// Gradle
+def gradle = [:]
+gradle.android = "com.android.tools.build:gradle:$versions.androidGradlePlugin"
+gradle.kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+deps.gradle = gradle
+// Kotlin
+def kotlin = [:]
+// standard library
+def stdLib = [:]
+stdLib.common = "org.jetbrains.kotlin:kotlin-stdlib-common:$versions.kotlin"
+stdLib.jdk8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.kotlin"
+kotlin.stdLib = stdLib
+kotlin.ktx = "androidx.corde:corde-ktx:$versions.ktx"
+kotlin.coroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutines"
+kotlin.coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines"
+deps.kotlin = kotlin
+// Anko
+def anko = [:]
+anko.commons = "org.jetbrains.anko:anko-commons:$versions.ankoVersion"
+anko.coroutines = "org.jetbrains.anko:anko-coroutines:$versions.ankoVersion"
+deps.anko = anko
+// Android support
+def androidSupport = [:]
+androidSupport.appCompat = "com.android.support:appcompat-v7:$versions.supportLibrary"
+androidSupport.supportV4 = "com.android.support:support-v4:$versions.supportLibrary"
+androidSupport.design = "com.android.support:design:$versions.supportLibrary"
+androidSupport.constraint =
+        "com.android.support.constraint:constraint-layout:$versions.constraintLayout"
+deps.androidSupport = androidSupport
+// Assign into ext
+ext.deps = deps
+
+static def addRepos(RepositoryHandler handler) {
+    handler.google()
+    handler.jcenter()
+    handler.mavenCentral()
+}
+
+ext.addRepos = this.&addRepos
