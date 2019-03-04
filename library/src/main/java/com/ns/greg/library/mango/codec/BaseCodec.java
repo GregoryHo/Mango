@@ -37,6 +37,10 @@ abstract class BaseCodec {
    * Codec format
    *-------------------------------*/
 
+  public CodecFormat getCodecFormat() {
+    return codecFormat;
+  }
+
   String getMimeType() {
     return codecFormat.getType();
   }

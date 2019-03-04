@@ -84,6 +84,10 @@ public class Speaker implements DecodeListener {
     audioDecoder.decode(content, contentLength, sampleRate, channelCount, playTimeMs);
   }
 
+  public CodecFormat getCodecFormat() {
+    return audioDecoder.getCodecFormat();
+  }
+
   public CodecState getDecoderState() {
     return audioDecoder.getState();
   }

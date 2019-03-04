@@ -35,7 +35,10 @@ public class RtspPlayer {
   public void setRenderOptions(RenderOptions renderOptions) {
     this.renderOptions = renderOptions;
     if (renderOptions != null) {
-      videoDecoder.setSurface(renderOptions.getSurface());
+      Surface surface = renderOptions.getSurface();
+      if (surface != null) {
+        videoDecoder.setSurface(renderOptions.getSurface());
+      }
     }
   }
 
@@ -66,6 +69,10 @@ public class RtspPlayer {
 
   public void prepareSpeaker(int sampleRate, int channelCount) {
     speaker.prepare(sampleRate, channelCount);
+  }
+
+  public Boolean formatChanged(CodecFormat videoFormat, CodecFormat audioFormat) {
+    return videoDecoder.getCodecFormat() != videoFormat || speaker.getCodecFormat() != audioFormat;
   }
 
   public void start() {
