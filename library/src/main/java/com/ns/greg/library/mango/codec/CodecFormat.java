@@ -15,7 +15,8 @@ public enum CodecFormat {
   /*--------------------------------
    * Video
    *-------------------------------*/
-  VIDEO_AVC("video/avc", -1);
+  VIDEO_AVC("video/avc", -1),
+  VIDEO_HEVC("video/hevc", - 1);
 
   private final String type;
   private final int profile;
